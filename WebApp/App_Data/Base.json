@@ -1,0 +1,23 @@
+﻿[
+    {
+        "id": 1,
+        "name": "Jose",
+        "lastName": "Rodriguez",
+        "tel": "10321312",
+        "ra": 1
+    },
+    {
+        "id": 2,
+        "name": "Josias",
+        "lastName": "Rodriguez",
+        "tel": "10321312",
+        "ra": 2
+    },
+    {
+        "id": 3,
+        "name": "Gabriel",
+        "lastName": "Henud",
+        "tel": "21321323",
+        "ra": 3
+    }
+]
