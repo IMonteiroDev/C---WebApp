@@ -58,9 +58,29 @@ function deleteStudent(id) {
     xhr.send();
 }
 
-function del(id) {
-    deleteStudent(id);
-    loadStudents();
+function del(student) {
+
+    bootbox.confirm({
+        message: `Tem certeza que deseja excluir o estudante ${student.name}?`,
+        buttons: {
+            confirm: {
+            label: 'Sim',
+            className: 'btn-success'
+            },
+            cancel: {
+            label: 'Não',
+            className: 'btn-danger'
+            }
+        },
+        callback: function (result) {
+            if(result){
+                deleteStudent(student.id);
+                loadStudents();
+            }
+        }
+        });
+
+    
 }
 
 
@@ -69,8 +89,7 @@ loadStudents();
 
 function editStudent(student) {
     let btnSave = document.querySelector('#btnSave');
-    let btnCancel = document.querySelector('#btnCancel');
-    let title = document.querySelector('#title');
+    let titleModal = document.querySelector('#titleModal');
 
     document.querySelector('#name').value = student.name;
     document.querySelector('#lastName').value = student.lastName;
@@ -78,16 +97,14 @@ function editStudent(student) {
     document.querySelector('#ra').value = student.ra;
 
     btnSave.textContent = 'Salvar';
-    btnCancel.textContent = 'Cancelar';
-    title.textContent = `Editar Aluno ${student.name}`;
+    titleModal.textContent = `Editar Aluno ${student.name}`;
     
     aluno = student;
 }
 
-function cancel() {
+function newStudent() {
     let btnSave = document.querySelector('#btnSave');
-    let btnCancel = document.querySelector('#btnCancel');
-    let title = document.querySelector('#title');
+    let titleModal = document.querySelector('#titleModal');
     
     document.querySelector('#name').value = '';
     document.querySelector('#lastName').value = '';
@@ -97,9 +114,23 @@ function cancel() {
     aluno = {};
 
     btnSave.textContent = 'Cadastrar';
-    btnCancel.textContent = 'Limpar';
-    title.textContent = 'Cadastrar Aluno';
+    titleModal.textContent = 'Cadastrar Aluno';
     
+}
+
+function cancel() {
+    let btnSave = document.querySelector('#btnSave');
+    let titleModal = document.querySelector('#titleModal');
+    
+    document.querySelector('#name').value = '';
+    document.querySelector('#lastName').value = '';
+    document.querySelector('#tel').value = '';
+    document.querySelector('#ra').value = '';
+
+    aluno = {};
+
+    btnSave.textContent = 'Cadastrar';
+    titleModal.textContent = 'Cadastrar Aluno';
     
 }
 
@@ -112,8 +143,8 @@ function addLine(student){
                     <td>${student.tel}</td>
                     <td>${student.ra}</td>
                     <td>
-                        <button onclick='editStudent(${JSON.stringify(student)})'>Editar</button></td>
-                        <button onclick='del(${student.id})'>Deletar</button>
+                        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick='editStudent(${JSON.stringify(student)})'>Editar</button>
+                        <button class="btn btn-danger" onclick='del(${JSON.stringify(student)})'>Deletar</button>
                     </td>
                 </tr>
                 `
