@@ -1,19 +1,5 @@
 [
   {
-    "id": 1,
-    "name": "Jose",
-    "lastName": "Amaral",
-    "tel": "10321312",
-    "ra": 1
-  },
-  {
-    "id": 2,
-    "name": "Josias",
-    "lastName": "Rodriguez",
-    "tel": "10321312",
-    "ra": 2
-  },
-  {
     "id": 3,
     "name": "Gabriel",
     "lastName": "Henud",
@@ -33,19 +19,5 @@
     "lastName": "Rodrigues",
     "tel": "2393021",
     "ra": 13
-  },
-  {
-    "id": 6,
-    "name": "dee",
-    "lastName": "ee",
-    "tel": "ee",
-    "ra": 123
-  },
-  {
-    "id": 7,
-    "name": "312",
-    "lastName": "33",
-    "tel": "33",
-    "ra": 33
   }
 ]

@@ -58,29 +58,10 @@ function deleteStudent(id) {
     xhr.send();
 }
 
-function del(student) {
-
-    bootbox.confirm({
-        message: `Tem certeza que deseja excluir o estudante ${student.name}?`,
-        buttons: {
-            confirm: {
-            label: 'Sim',
-            className: 'btn-success'
-            },
-            cancel: {
-            label: 'Não',
-            className: 'btn-danger'
-            }
-        },
-        callback: function (result) {
-            if(result){
-                deleteStudent(student.id);
-                loadStudents();
-            }
-        }
-        });
-
+function del(id) {
     
+            deleteStudent(id);
+            loadStudents();
 }
 
 
@@ -131,7 +112,6 @@ function cancel() {
 
     btnSave.textContent = 'Cadastrar';
     titleModal.textContent = 'Cadastrar Aluno';
-    
 }
 
 
@@ -143,8 +123,8 @@ function addLine(student){
                     <td>${student.tel}</td>
                     <td>${student.ra}</td>
                     <td>
-                        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick='editStudent(${JSON.stringify(student)})'>Editar</button>
-                        <button class="btn btn-danger" onclick='del(${JSON.stringify(student)})'>Deletar</button>
+                        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal" onclick='editStudent(${JSON.stringify(student)})'>Editar</button>
+                        <button class="btn btn-danger" onclick='del(${student.id})'>Deletar</button>
                     </td>
                 </tr>
                 `
