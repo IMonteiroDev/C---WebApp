@@ -10,17 +10,29 @@ using WebApp.Models;
 namespace WebApp.Controllers
 {
     [EnableCors("*","*","*")] //Decoration
+    [RoutePrefix("api/Aluno")]
 
     public class AlunoController : ApiController
     {
         // GET: api/Aluno
-        public IEnumerable<Aluno> Get()
+        [HttpGet]
+        [Route("Recuperar")]
+        public IHttpActionResult Get()
         {
-            Aluno aluno = new Aluno();
-            return aluno.ListarAlunos();
+            try
+            {
+                Aluno aluno = new Aluno();
+                return Ok(aluno.ListarAlunos());
+            }
+            catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
         // GET: api/Aluno/5
+        [HttpGet]
+        [Route("Recuperar/{id}")]
         public Aluno Get(int id)
         {  
             Aluno alunos = new Aluno();
