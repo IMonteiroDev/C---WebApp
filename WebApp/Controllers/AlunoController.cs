@@ -36,32 +36,59 @@ namespace WebApp.Controllers
         public Aluno Get(int id)
         {  
             Aluno alunos = new Aluno();
-            return alunos.ListarAlunos().Where(x=> x.id == id).FirstOrDefault();
+            return alunos.ListarAlunos(id).FirstOrDefault();
         }
 
-        // POST: api/Aluno
-        public List<Aluno> Post(Aluno aluno)
+        [HttpPost]
+        public IHttpActionResult Post(Aluno aluno)
         {
-            Aluno _aluno = new Aluno();
+            try
+            {
+                Aluno _aluno = new Aluno();
 
-            _aluno.Inserir(aluno);
-            return _aluno.ListarAlunos();
+                _aluno.Inserir(aluno);
+                return Ok(_aluno.ListarAlunos());
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
-        // PUT: api/Aluno/5
-        public Aluno Put(int id,[FromBody] Aluno aluno)
+        [HttpPut]
+        public IHttpActionResult Put(int id,[FromBody] Aluno aluno)
         {
-            Aluno _aluno = new Aluno();
+            try
+            {
+                Aluno _aluno = new Aluno();
+                aluno.id = id;
 
-            return _aluno.Atualizar(id, aluno);
+                _aluno.Atualizar(aluno);
+
+                return Ok(_aluno.ListarAlunos(id).FirstOrDefault());
+            }
+            catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
-        // DELETE: api/Aluno/5
-        public void Delete(int id)
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
         {
-            Aluno _aluno = new Aluno();
 
-            _aluno.Deletar(id);
+            try
+            {
+                Aluno _aluno = new Aluno();
+
+                _aluno.Deletar(id);
+
+                return Ok("Deletado com Sucesso!");
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
     }
 }
